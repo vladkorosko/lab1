@@ -8,9 +8,8 @@ int main()
     cout << c;
     SortList<int> b(c);
     cout << b.GetList();
-    SortList<int> d(10);
-    d.AutoGenerate();
-    cout << d.GetList();
+    SortList<string> d(10);
+    vector<string> t = d.GetList();
     d.BubbleSort();
     cout << d.GetList();
     return 0;

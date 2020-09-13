@@ -5,10 +5,11 @@
 #include<string>
 #include<random>
 #include<time.h>
+#include<typeinfo>
 
 using namespace std;
-template<typename T>
 
+template<typename T>
 class SortList
 {
 private:
@@ -109,12 +110,6 @@ public:
 		list = new_list;
 	}
 
-	void AutoGenerate()
-	{
-		for (int i = 0; i < list.size(); i++)
-			list[i] = rand();
-	}
-
 	vector<T> GetList() const
 	{
 		return list;
@@ -170,3 +165,4 @@ public:
 		merge_sort(0, list.size() - 1);
 	}
 };
+
