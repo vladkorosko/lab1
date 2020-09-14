@@ -150,6 +150,7 @@
     <ClCompile Include="lab1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Date.h" />
     <ClInclude Include="NewFunctions.h" />
     <ClInclude Include="SortList.h" />
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include<random>
 #include<time.h>
 #include<typeinfo>
+#include<sstream>
 
 using namespace std;
 
