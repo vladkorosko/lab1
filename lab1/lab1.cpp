@@ -5,8 +5,8 @@ int main()
     srand(time(NULL));
     try
     {
-        Date a("0: 2020.9.15; 0:0:0");
-        cout << a.GetNameOfDay();
+        Date a("+2: 2020.09.15; 00:00:00");
+        cout << a.GetNameOfDay() << endl << a.GetDate();
     }
     catch (logic_error e)
     {

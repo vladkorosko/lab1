@@ -104,7 +104,7 @@ private:
 
 	bool CheckDay(const int& new_day, const int& new_month, const int& new_year) const
 	{
-		return new_day < daysInMonth[new_month - 1] + LeapYear(new_year) * (new_month == 2) && new_day > 0;
+		return new_day <= daysInMonth[new_month - 1] + LeapYear(new_year) * (new_month == 2) && new_day > 0;
 	}
 
 	bool CheckUTC(const int& utc) const
@@ -179,7 +179,7 @@ private:
 			month_name = NameOfMonth(new_month);
 			int all_days = 0;
 			for (int i = 1970; i < year; i++)
-				if (LeapYear(year))
+				if (LeapYear(i))
 					all_days += 366;
 				else all_days += 365;
 			for (int i = 0; i < month - 1; i++)
@@ -189,6 +189,7 @@ private:
 				all_days += daysInMonth[i];
 			}
 			all_days += day;
+			day--;
 			day_name = NameOfDay(all_days);
 		}
 		else
@@ -203,42 +204,6 @@ private:
 	}
 public:
 	Date() {};
-
-	Date(time_t TimE, int utc)
-	{
-		UTC = utc;
-		TimE += utc * 3600;
-		int new_second = TimE % 60;
-		TimE /= 60;
-		int new_minute = TimE % 60;
-		TimE /= 60;
-		int new_hour = TimE % 24;
-		TimE /= 24;
-		mytime = Time(new_hour, new_minute, new_second);
-		day = TimE;
-		day_name = NameOfDay(day);
-		year = 1970;
-		while (day > -1)
-		{
-			if (LeapYear(year))
-				day -= 366;
-			else
-				day -= 365;
-			year++;
-		}
-		year--;
-		if (LeapYear(year))
-			day += 366;
-		else
-			day += 365;
-		month = 1;
-		while (!CheckDay(day, month, year))
-		{
-			month++;
-			day -= daysInMonth[month - 1] + LeapYear(year) * (month == 2);
-		}
-		month_name = NameOfMonth(month);
-	}
 
 	Date(const int& utc, const int& new_year, const int& new_month, const int& new_day,
 		const int& new_hour, const int& new_minute, const int& new_second)
