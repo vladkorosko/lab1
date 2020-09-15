@@ -269,6 +269,16 @@ public:
 		Set(utc, new_year, new_month, new_day, new_hour, new_minute, new_second );
 	}
 
+	int GetUTC() const
+	{
+		return UTC;
+	}
+
+	Time GetTime()const
+	{
+		return mytime;
+	}
+
 	int GetDay() const
 	{
 		return day;
@@ -297,7 +307,7 @@ public:
 	string GetDate()const
 	{
 		string result = "";
-		if (UTC > 0)
+		if (UTC >= 0)
 			result += '+';
 		else result += '-';
 		result += to_string(UTC);
