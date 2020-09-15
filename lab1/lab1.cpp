@@ -2,10 +2,11 @@
 
 int main()
 {
+    srand(time(NULL));
     try
     {
-        Date a("+02: 2020.02.02; 08:59:59");
-        cout << a.GetDate();
+        Date a("0: 2020.2.29; 0:0:0");
+        cout << a.GetNameOfDay();
     }
     catch (logic_error e)
     {

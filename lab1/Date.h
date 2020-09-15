@@ -1,15 +1,79 @@
 #pragma once
 #include"SortList.h"
 
+class Time
+{
+private:
+	int hour;
+	int minute;
+	int second;
+
+	bool CheckHour(const int& new_hour) const
+	{
+		return new_hour >= 0 && new_hour < 24;
+	}
+
+	bool CheckMinute(const int& new_minute) const
+	{
+		return new_minute >= 0 && new_minute < 60;
+	}
+
+public:
+	Time() {};
+
+	Time(const int& new_hour, const int& new_minute, const int& new_second)
+	{
+		if (CheckHour(new_hour) && CheckMinute(new_minute) && CheckMinute(new_second))
+		{
+			hour = new_hour;
+			minute = new_minute;
+			second = new_second;
+		}
+		else
+		{
+			if (!CheckHour(new_hour))
+				throw logic_error("Hour value is invalid: " + to_string(new_hour));
+			if (!CheckMinute(new_minute))
+				throw logic_error("Minute value is invalid: " + to_string(new_minute));
+			if (!CheckMinute(new_second))
+				throw logic_error("Second value is invalid: " + to_string(new_second));
+		}
+	}
+
+	int GetHour() const
+	{
+		return hour;
+	}
+
+	int GetMinute()const
+	{
+		return minute;
+	}
+
+	int GetSecond()const
+	{
+		return second;
+	}
+
+	string GetTime() const
+	{
+		string result = "";
+		result += to_string(hour);
+		result += ':';
+		result += to_string(minute);
+		result += ':';
+		result += to_string(second);
+		return result;
+	}
+};
+
 class Date
 {
 private:
 	int year;
 	int month;
 	int day;
-	int hour;
-	int minute;
-	int second;
+	Time mytime;
 	string day_name;
 	string month_name;
 	int UTC;
@@ -41,16 +105,6 @@ private:
 	bool CheckDay(const int& new_day, const int& new_month, const int& new_year) const
 	{
 		return new_day < daysInMonth[new_month - 1] + LeapYear(new_year) * (new_month == 2) && new_day > 0;
-	}
-
-	bool CheckHour(const int& new_hour) const
-	{
-		return new_hour >= 0 && new_hour < 24;
-	}
-
-	bool CheckMinute(const int& new_minute) const
-	{
-		return new_minute >= 0 && new_minute < 60;
 	}
 
 	bool CheckUTC(const int& utc) const
@@ -115,16 +169,13 @@ private:
 	void Set(const int& utc, const int& new_year, const int& new_month, const int& new_day,
 			const int& new_hour, const int& new_minute, const int& new_second)
 	{
-		if (CheckMonth(new_month) && CheckDay(new_day, new_month, new_year) && CheckUTC(utc)
-			&& CheckHour(new_hour) && CheckMinute(new_minute) && CheckMinute(new_second))
+		if (CheckMonth(new_month) && CheckDay(new_day, new_month, new_year) && CheckUTC(utc))
 		{
 			year = new_year;
 			month = new_month;
 			day = new_day;
 			UTC = utc;
-			hour = new_hour;
-			minute = new_minute;
-			second = new_second;
+			mytime = Time(new_hour, new_minute, new_second);
 			month_name = NameOfMonth(new_month);
 			int all_days = 0;
 			for (int i = 1970; i < year; i++)
@@ -142,35 +193,29 @@ private:
 		}
 		else
 		{
-			if (CheckMonth(new_month))
+			if (!CheckMonth(new_month))
 				throw logic_error("Month value is invalid: " + to_string(new_month));
-			if (CheckDay(new_day, new_month, new_year))
+			if (!CheckDay(new_day, new_month, new_year))
 				throw logic_error("Day value is invalid: " + to_string(new_day));
-			if (CheckHour(new_hour))
-				throw logic_error("Hour value is invalid: " + to_string(new_hour));
-			if (CheckMinute(new_minute))
-				throw logic_error("Minute value is invalid: " + to_string(new_minute));
-			if (CheckMinute(new_second))
-				throw logic_error("Second value is invalid: " + to_string(new_second));
-			if (CheckUTC(utc))
+			if (!CheckUTC(utc))
 				throw logic_error("UTC value is invalid: " + to_string(utc));
 		}
 	}
 public:
 	Date() {};
 
-	Date(time_t Time, int utc)
+	Date(time_t TimE, int utc)
 	{
 		UTC = utc;
-		Time += utc * 3600;
-		second = Time % 60;
-		Time /= 60;
-		minute = Time % 60;
-		Time /= 60;
-		hour = Time % 24;
-		Time /= 24;
-		day = Time;
-		day++;
+		TimE += utc * 3600;
+		int new_second = TimE % 60;
+		TimE /= 60;
+		int new_minute = TimE % 60;
+		TimE /= 60;
+		int new_hour = TimE % 24;
+		TimE /= 24;
+		mytime = Time(new_hour, new_minute, new_second);
+		day = TimE;
 		day_name = NameOfDay(day);
 		year = 1970;
 		while (day > -1)
@@ -277,21 +322,6 @@ public:
 		return year;
 	}
 
-	int GetHour() const
-	{
-		return hour;
-	}
-
-	int GetMinute()const
-	{
-		return minute;
-	}
-
-	int GetSecond()const
-	{
-		return second;
-	}
-
 	string GetDate()const
 	{
 		string result = "";
@@ -306,11 +336,7 @@ public:
 		result += '.';
 		result += to_string(day);
 		result += "; ";
-		result += to_string(hour);
-		result += ':';
-		result += to_string(minute);
-		result += ':';
-		result += to_string(second);
+		result += mytime.GetTime();
 		return result;
 	}
 };
