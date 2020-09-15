@@ -2,11 +2,14 @@
 
 int main()
 {
-    vector<int> c = { 2,3,4,5,6,1,34,5,6 };
-    cout << c;
-    SortList<int> b = c;
-    cout << b.GetList();
-    b.BubbleSort();
-    cout << b.GetList();
+    try
+    {
+        Date a("+02: 2020.02.02; 08:59:59");
+        cout << a.GetDate();
+    }
+    catch (logic_error e)
+    {
+        cout << e.what();
+    }
     return 0;
 }
