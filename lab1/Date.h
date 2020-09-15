@@ -97,6 +97,11 @@ private:
 		return leapyear;
 	}
 
+	bool CheckYear(const int& year)const
+	{
+		return year > 1969;
+	}
+
 	bool CheckMonth(const int& new_month) const
 	{
 		return new_month < 13 && new_month > 0;
@@ -169,7 +174,7 @@ private:
 	void Set(const int& utc, const int& new_year, const int& new_month, const int& new_day,
 			const int& new_hour, const int& new_minute, const int& new_second)
 	{
-		if (CheckMonth(new_month) && CheckDay(new_day, new_month, new_year) && CheckUTC(utc))
+		if (CheckYear(new_year) && CheckMonth(new_month) && CheckDay(new_day, new_month, new_year) && CheckUTC(utc))
 		{
 			year = new_year;
 			month = new_month;
@@ -189,11 +194,13 @@ private:
 				all_days += daysInMonth[i];
 			}
 			all_days += day;
-			day--;
+			all_days--;
 			day_name = NameOfDay(all_days);
 		}
 		else
 		{
+			if (!CheckYear(new_year))
+				throw logic_error("Year value is invalid: " + to_string(new_year));
 			if (!CheckMonth(new_month))
 				throw logic_error("Month value is invalid: " + to_string(new_month));
 			if (!CheckDay(new_day, new_month, new_year))
