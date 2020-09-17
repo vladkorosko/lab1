@@ -23,6 +23,7 @@ ostream& operator<<(ostream& s, Date date)
 	s << date.GetNameOfDay() << ", the " << date.GetDay() << " of " + date.GetNameOfMonth() + ", " << date.GetYear() << endl << "UTC: ";
 	if (date.GetUTC() >= 0)
 		s << '+';
+	else s << '-';
 	s << setfill('0') << setw(2) << date.GetUTC() << "   Time: " << date.GetTime();
 	return s;
 }
