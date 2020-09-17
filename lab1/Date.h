@@ -19,9 +19,14 @@ private:
 	}
 
 public:
-	Time() {};
+	Time()
+	{
+		hour = 0;
+		minute = 0;
+		second = 0;
+	};
 
-	Time(const int& new_hour, const int& new_minute, const int& new_second)
+	void SetTime(const int& new_hour, const int& new_minute, const int& new_second)
 	{
 		if (CheckHour(new_hour) && CheckMinute(new_minute) && CheckMinute(new_second))
 		{
@@ -38,6 +43,11 @@ public:
 			if (!CheckMinute(new_second))
 				throw logic_error("Second value is invalid: " + to_string(new_second));
 		}
+	}
+
+	Time(const int& new_hour, const int& new_minute, const int& new_second)
+	{
+		SetTime(new_hour, new_minute, new_second);
 	}
 
 	int GetHour() const
@@ -117,8 +127,21 @@ private:
 		return utc > -13 && utc < 13;
 	}
 
-	string NameOfDay(const int& new_day) const
+	string NameOfDay(const int& new_day, const int& new_month, const int& new_year) const
 	{
+		int all_days = 0;
+		for (int i = 1970; i < new_year; i++)
+			if (LeapYear(i))
+				all_days += 366;
+			else all_days += 365;
+		for (int i = 0; i < new_month - 1; i++)
+		{
+			if (i == 1 && LeapYear(new_year))
+				all_days++;
+			all_days += daysInMonth[i];
+		}
+		all_days += new_day;
+		all_days--;
 		switch (new_day % 7)
 		{
 		case 0:
@@ -136,8 +159,6 @@ private:
 		default:
 			return "Wednesday";
 		}
-
-
 	} 
 
 	string NameOfMonth(const int& new_month) const
@@ -182,20 +203,7 @@ private:
 			UTC = utc;
 			mytime = Time(new_hour, new_minute, new_second);
 			month_name = NameOfMonth(new_month);
-			int all_days = 0;
-			for (int i = 1970; i < year; i++)
-				if (LeapYear(i))
-					all_days += 366;
-				else all_days += 365;
-			for (int i = 0; i < month - 1; i++)
-			{
-				if (i == 1 && LeapYear(year))
-					all_days++;
-				all_days += daysInMonth[i];
-			}
-			all_days += day;
-			all_days--;
-			day_name = NameOfDay(all_days);
+			day_name = NameOfDay(new_year, new_month, new_day);
 		}
 		else
 		{
@@ -210,7 +218,14 @@ private:
 		}
 	}
 public:
-	Date() {};
+	Date() 
+	{
+		year = 1970;
+		month = 1;
+		day = 1;
+		UTC = 0;
+		mytime = Time();
+	};
 
 	Date(const int& utc, const int& new_year, const int& new_month, const int& new_day,
 		const int& new_hour, const int& new_minute, const int& new_second)
@@ -274,6 +289,51 @@ public:
 		return UTC;
 	}
 
+	int ChangeUTC(int utc)
+	{
+		if (CheckUTC(utc))
+		{
+			int difference = utc - UTC;
+			int new_hour = mytime.GetHour() + difference;
+			if (new_hour > 23)
+			{
+				new_hour -= 24;
+				day++;
+				if (!CheckDay(day, month, year))
+				{
+					day = 1;
+					month++;
+					if (!CheckMonth(month))
+					{
+						month = 1;
+						year++;
+					}
+				}
+			}
+			else if (new_hour < 0)
+			{
+				new_hour += 24;
+				day--;
+				if (!CheckDay(day, month, year))
+				{
+					month--;
+					if (!CheckMonth(month))
+					{
+						year--;
+						if (!CheckYear(year))
+							throw logic_error("Result is lover then UTC +0: 1970.1.1 00:00:00.");
+						else month = 12;
+					}
+					day = daysInMonth[month - 1] + (month == 2) * LeapYear(year);
+				}
+			}
+			day_name = NameOfDay(year, month, day);
+			month_name = NameOfMonth(month);
+			UTC = utc;
+			mytime.SetTime(new_hour, mytime.GetMinute(), mytime.GetSecond());
+		}
+	}
+
 	Time GetTime()const
 	{
 		return mytime;
@@ -309,7 +369,6 @@ public:
 		string result = "";
 		if (UTC >= 0)
 			result += '+';
-		else result += '-';
 		result += to_string(UTC);
 		result += ": ";
 		result += to_string(year);
@@ -320,5 +379,33 @@ public:
 		result += "; ";
 		result += mytime.GetTime();
 		return result;
+	}
+};
+
+class TimeDifference
+{
+	int day;
+	Time t;
+public:
+	TimeDifference()
+	{
+		day = 0;
+		t = Time();
+	}
+
+	TimeDifference(const int& new_day, const int& new_hour, const int& new_minute, const int& new_second)
+	{
+		day = new_day;
+		t = Time(new_hour, new_minute, new_second);
+	}
+
+	int GetDay()
+	{
+		return day;
+	}
+
+	Time GetTime()
+	{
+		return t;
 	}
 };
