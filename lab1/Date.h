@@ -441,12 +441,12 @@ public:
 		t = Time(new_hour, new_minute, new_second);
 	}
 
-	int GetDay()
+	int GetDay() const
 	{
 		return day;
 	}
 
-	Time GetTime()
+	Time GetTime() const
 	{
 		return t;
 	}

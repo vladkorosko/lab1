@@ -130,3 +130,55 @@ TimeDifference operator-(Date d1, Date d2)
 	}
 	else throw logic_error("Fisrt date is lover then second date.");
 }
+
+Date operator+(const Date& d1, const TimeDifference& diff)
+{
+	int second = d1.GetTime().GetSecond() + diff.GetTime().GetSecond();
+	int minute = d1.GetTime().GetMinute() + diff.GetTime().GetMinute();
+	int hour = d1.GetTime().GetHour() + diff.GetTime().GetHour();
+	int days = d1.GetDateInDays() + diff.GetDay();
+	if (second > 59)
+	{
+		second -= 60;
+		minute++;
+		if (minute > 59)
+		{
+			minute -= 60;
+			hour++;
+			if (hour > 23)
+			{
+				hour -= 24;
+				days++;
+			}
+		}
+	}
+	return Date(d1.GetUTC(), days, hour, minute, second);
+}
+
+Date operator-(const Date& d1, const TimeDifference& diff)
+{
+	if (d1.GetDateInDays() > diff.GetDay() || (d1.GetDateInDays() == diff.GetDay() && d1.GetTime() > diff.GetTime()))
+	{
+		int second = d1.GetTime().GetSecond() - diff.GetTime().GetSecond();
+		int minute = d1.GetTime().GetMinute() - diff.GetTime().GetMinute();
+		int hour = d1.GetTime().GetHour() - diff.GetTime().GetHour();
+		int days = d1.GetDateInDays() - diff.GetDay();
+		if (second < 0)
+		{
+			second += 60;
+			minute--;
+			if (minute < 0)
+			{
+				minute += 60;
+				hour--;
+				if (hour < 0)
+				{
+					hour += 24;
+					days--;
+				}
+			}
+		}
+		return Date(d1.GetUTC(), days, hour, minute, second);
+	}
+	else throw logic_error("Result Date is lover then +0: 1970.1.1; 00:00:00");
+}
