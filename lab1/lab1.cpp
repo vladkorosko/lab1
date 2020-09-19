@@ -5,10 +5,10 @@ int main()
     srand(time(NULL));
     try
     {
-        Date a("+2: 2020.09.19; 10:00:30");
+        Date a(2,18262,10,10,10);
         Date b("+3: 2019.9.19; 10:00:30");
         //.ChangeUTC(-12);
-        cout << a-b;
+        cout << a.GetDateInDays();
     }
     catch (logic_error e)
     {

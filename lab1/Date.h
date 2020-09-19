@@ -146,6 +146,27 @@ private:
 		return all_days;
 	}
 
+	vector<int> ConvertToDate(int days)
+	{
+		days++;
+		int new_year = 1970;
+		for (new_year; days > 365 + LeapYear(new_year); new_year++)
+			if (LeapYear(new_year))
+				days -= 366;
+			else days -= 365;
+		int new_month = 1;
+		for (new_month; days > daysInMonth[new_month - 1]; new_month++)
+		{
+			if (new_month == 2 && LeapYear(new_year))
+				days--;
+			days -= daysInMonth[new_month-1];
+		}
+		vector<int> a(3, 0);
+		a[0] = new_year;
+		a[1] = new_month;
+		a[2] = days;
+		return a;
+	}
 
 	string NameOfDay() const
 	{
@@ -234,6 +255,13 @@ public:
 		UTC = 0;
 		mytime = Time();
 	};
+
+	Date(const int& utc, const int& days, const int& new_hour, const int& new_minute, const int& new_second)
+	{
+		vector<int> a = ConvertToDate(days);
+		int new_year = a[0], new_month = a[1], new_day = a[2];
+		Set(utc, new_year, new_month, new_day, new_hour, new_minute, new_second);
+	}
 
 	Date(const int& utc, const int& new_year, const int& new_month, const int& new_day,
 		const int& new_hour, const int& new_minute, const int& new_second)
