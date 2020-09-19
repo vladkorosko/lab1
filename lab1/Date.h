@@ -68,11 +68,23 @@ public:
 	string GetTime() const
 	{
 		string result = "";
-		result += to_string(hour);
+		string line = "00";
+		line += to_string(hour);
+		while (line.size() > 2)
+			line.erase(line.begin());
+		result += line;
 		result += ':';
-		result += to_string(minute);
+		line = "00";
+		line += to_string(minute);
+		while (line.size() > 2)
+			line.erase(line.begin());
+		result += line;
 		result += ':';
-		result += to_string(second);
+		line = "00";
+		line += to_string(second);
+		while (line.size() > 2)
+			line.erase(line.begin());
+		result += line;
 		return result;
 	}
 };
@@ -319,6 +331,11 @@ public:
 
 		Set(utc, new_year, new_month, new_day, new_hour, new_minute, new_second );
 	}
+	
+	void operator=(const Date& d)
+	{
+		Set(d.GetUTC(), d.GetYear(), d.GetMonth(), d.GetDay(), d.GetTime().GetHour(), d.GetTime().GetMinute(), d.GetTime().GetSecond());
+	}
 
 	void AutoGenerate()
 	{
@@ -427,9 +444,17 @@ public:
 		result += ": ";
 		result += to_string(year);
 		result += '.';
-		result += to_string(month);
+		string line = "00";
+		line += to_string(month);
+		while (line.size() > 2)
+			line.erase(line.begin());
+		result += line;
 		result += '.';
-		result += to_string(day);
+		line = "00";
+		line += to_string(day);
+		while (line.size() > 2)
+			line.erase(line.begin());
+		result += line;
 		result += "; ";
 		result += mytime.GetTime();
 		return result;

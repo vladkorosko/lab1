@@ -3,16 +3,15 @@
 int main()
 {
     srand(time(NULL));
-    
-    
     try
     {
         vector<Date> a(10);
-        for (auto i : a)
+        for (auto& i : a)
             i.AutoGenerate();
-        SortList<Date> dates(a);/*
-        dates.BubbleSort();
-        cout << dates.GetList();*/
+        SortList<Date> dates(a); 
+        cout << dates.GetList() << endl;
+        dates.InsertionSort();
+        cout << dates.GetList() << endl;
     }
     catch (logic_error e)
     {

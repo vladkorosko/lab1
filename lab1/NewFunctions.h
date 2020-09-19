@@ -1,14 +1,13 @@
 #pragma once
 #include"Date.h"
 
-template <typename T>
 
+template <typename T>
 ostream& operator<<(ostream& s, vector<T> l)
 {
-	s << " ";
-	for (int i = 0; i < l.size(); i++)
+	for (int i = 0; i < l.size()-1; i++)
 		s << l[i] << " ";
-	s << endl;
+	s << l[l.size() - 1];
 	return s;
 }
 
@@ -181,4 +180,11 @@ Date operator-(const Date& d1, const TimeDifference& diff)
 		return Date(d1.GetUTC(), days, hour, minute, second);
 	}
 	else throw logic_error("Result Date is lover then +0: 1970.1.1; 00:00:00");
+}
+
+ostream& operator<<(ostream& s, vector<Date> l)
+{
+	for (int i = 0; i < l.size(); i++)
+		s << l[i].GetDate() << endl;
+	return s;
 }

@@ -47,7 +47,7 @@ private:
 		int n1 = index_of_last_element_of_first_part - index_of_first_element_of_first_part + 1;
 		int n2 = index_of_last_element_second_part - index_of_last_element_of_first_part;
 
-		vector<string> First_array(n1, ""), Second_array(n2, "");
+		vector<T> First_array(n1, ""), Second_array(n2, "");
 
 		for (i = 0; i < n1; i++)
 			First_array[i] = list[index_of_first_element_of_first_part + i];
@@ -107,9 +107,30 @@ public:
 		list = a;
 	}
 
+	void Add(T val)
+	{
+		list.push_back(val);
+	}
+
+	void Del(int index)
+	{
+		list.erase(list.begin() + index);
+	}
+
+	T GetValueByIndex(int index) const
+	{
+		return list[index];
+	}
+
+	T SetValueByIndex(int index, T val)
+	{
+		list[index] = val;
+	}
+
 	SortList(vector<T> new_list)
 	{
-		list = new_list;
+		for (auto i : new_list)
+			Add(i);
 	}
 
 	vector<T> GetList() const
