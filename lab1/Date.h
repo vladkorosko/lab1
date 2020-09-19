@@ -128,7 +128,7 @@ private:
 		return utc > -13 && utc < 13;
 	}
 
-	string NameOfDay(const int& new_day, const int& new_month, const int& new_year) const
+	int CountAllDays(const int& new_year, const int& new_month, const int& new_day)const
 	{
 		int all_days = 0;
 		for (int i = 1970; i < new_year; i++)
@@ -143,7 +143,13 @@ private:
 		}
 		all_days += new_day;
 		all_days--;
-		switch (new_day % 7)
+		return all_days;
+	}
+
+
+	string NameOfDay() const
+	{
+		switch (all_days % 7)
 		{
 		case 0:
 			return "Thurday";
@@ -204,7 +210,8 @@ private:
 			UTC = utc;
 			mytime = Time(new_hour, new_minute, new_second);
 			month_name = NameOfMonth(new_month);
-			day_name = NameOfDay(new_year, new_month, new_day);
+			all_days = CountAllDays(new_year, new_month, new_day);
+			day_name = NameOfDay();
 		}
 		else
 		{
@@ -328,7 +335,8 @@ public:
 					day = daysInMonth[month - 1] + (month == 2) * LeapYear(year);
 				}
 			}
-			day_name = NameOfDay(year, month, day);
+			all_days = CountAllDays(year, month, day);
+			day_name = NameOfDay();
 			month_name = NameOfMonth(month);
 			UTC = utc;
 			mytime.SetTime(new_hour, mytime.GetMinute(), mytime.GetSecond());

@@ -18,6 +18,12 @@ ostream& operator<<(ostream& s, Time t)
 	return s;
 }
 
+ostream& operator<<(ostream& s, TimeDifference diff)
+{
+	s << diff.GetDay() << "; " << diff.GetTime();
+	return s;
+}
+
 ostream& operator<<(ostream& s, Date date)
 {
 	s << date.GetNameOfDay() << ", the " << date.GetDay() << " of " + date.GetNameOfMonth() + ", " << date.GetYear() << endl << "UTC: ";
@@ -98,6 +104,9 @@ TimeDifference operator-(Date d1, Date d2)
 {
 	if (d1 > d2)
 	{
+		int utc = max(d1.GetUTC(), d2.GetUTC());
+		d1.ChangeUTC(utc);
+		d2.ChangeUTC(utc);
 		int second = d1.GetTime().GetSecond() - d2.GetTime().GetSecond();
 		int minute = d1.GetTime().GetMinute() - d2.GetTime().GetMinute();
 		int hour = d1.GetTime().GetHour() - d2.GetTime().GetHour();
@@ -119,5 +128,5 @@ TimeDifference operator-(Date d1, Date d2)
 		}
 		return TimeDifference(days, hour, minute, second);
 	}
-	else throw logic_error("Fisrt date is lover then second date.")
+	else throw logic_error("Fisrt date is lover then second date.");
 }
