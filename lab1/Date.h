@@ -320,6 +320,18 @@ public:
 		Set(utc, new_year, new_month, new_day, new_hour, new_minute, new_second );
 	}
 
+	void AutoGenerate()
+	{
+		int utc = -12 + rand() % 25;
+		int new_year = 1970 + rand() % 1000;
+		int new_month = 1 + rand() % 12;
+		int new_day = 1 + rand() % (daysInMonth[new_month-1] + (month == 2) * LeapYear(new_year));
+		int new_hour = rand() % 24;
+		int new_minute = rand() % 60;
+		int new_second = rand() % 60;
+		Set(utc, new_year, new_month, new_day, new_hour, new_minute, new_second);
+	}
+
 	int GetUTC() const
 	{
 		return UTC;
