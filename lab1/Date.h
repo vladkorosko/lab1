@@ -87,6 +87,7 @@ private:
 	string day_name;
 	string month_name;
 	int UTC;
+	int all_days;
 
 	const vector<int> daysInMonth = { 31, 28, 31,30,31,30,31,31,30,31,30,31 };
 
@@ -362,6 +363,11 @@ public:
 	int GetYear() const
 	{
 		return year;
+	}
+
+	int GetDateInDays() const
+	{
+		return all_days;
 	}
 
 	string GetDate()const

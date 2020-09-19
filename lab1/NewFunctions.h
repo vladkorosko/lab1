@@ -93,3 +93,31 @@ bool operator<(Date d1, Date d2)
 		return true;
 	return false;
 }
+
+TimeDifference operator-(Date d1, Date d2)
+{
+	if (d1 > d2)
+	{
+		int second = d1.GetTime().GetSecond() - d2.GetTime().GetSecond();
+		int minute = d1.GetTime().GetMinute() - d2.GetTime().GetMinute();
+		int hour = d1.GetTime().GetHour() - d2.GetTime().GetHour();
+		int days = d1.GetDateInDays() - d2.GetDateInDays();
+		if (second < 0)
+		{
+			second += 60;
+			minute--;
+			if (minute < 0)
+			{
+				minute += 60;
+				hour--;
+				if (hour < 0)
+				{
+					hour += 24;
+					days--;
+				}
+			}
+		}
+		return TimeDifference(days, hour, minute, second);
+	}
+	else throw logic_error("Fisrt date is lover then second date.")
+}
