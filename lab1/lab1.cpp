@@ -10,8 +10,12 @@ int main()
             i.AutoGenerate();
         SortList<Date> dates(a); 
         cout << dates.GetList() << endl;
-        dates.InsertionSort();
+        dates.QuickSort();
         cout << dates.GetList() << endl;
+        cout << endl;
+        Date c("+3: 10020.09.20; 21:29:59");
+        cout << c.Stats(1);
+
     }
     catch (logic_error e)
     {

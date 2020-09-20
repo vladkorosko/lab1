@@ -459,6 +459,46 @@ public:
 		result += mytime.GetTime();
 		return result;
 	}
+
+	vector<double> Stats()
+	{
+		int k = 0;
+		vector<double> stat(7, 0);
+		for (int i = 1970; i < year; i++)
+			for (int j = 1; j < 13; j++)
+				if (CheckDay(day, j, i))
+				{
+					stat[CountAllDays(i, j, day) % 7]++;
+					k++;
+				}
+		for (int i = 0; i < stat.size(); i++)
+		{
+			stat[i] /=k;
+		}
+		return stat;
+	}
+
+	vector<double> Stats(int stat_day)
+	{
+		if (stat_day < 32 && stat_day)
+		{
+			vector<double> stat(7, 0);
+			int k = 0;
+			for (int i = 1970; i < year; i++)
+				for (int j = 1; j < 13; j++)
+					if (CheckDay(stat_day, j, i))
+					{
+						stat[CountAllDays(i, j, stat_day) % 7]++;
+						k++;
+					}
+			for (int i = 0; i < stat.size(); i++)
+			{
+				stat[i] /= k;
+			}
+			return stat;
+		}
+		else throw logic_error("Day value is invalid: " + to_string(stat_day));
+	}
 };
 
 class TimeDifference
