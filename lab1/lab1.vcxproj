@@ -147,10 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Interactive.cpp" />
     <ClCompile Include="lab1.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="OverloadedOperators.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Connection.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="NewFunctions.h" />
     <ClInclude Include="SortList.h" />

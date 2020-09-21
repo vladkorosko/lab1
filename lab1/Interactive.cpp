@@ -1,13 +1,12 @@
 #include "Connection.h"
 
-void menu()
+void interactive_mode()
 {
-	string types[4]
+	const string types[3]
 	{
-		"Interactive dialog mode;",
-		"Demonstrative mode;",
-		"Benchmark;",
-		"Exit."
+		"Date and time;",
+		"Sort list;",
+		"Back."
 	};
 	int position = 0;
 	bool end = false;
@@ -15,8 +14,8 @@ void menu()
 	while (!end)
 	{
 		system("cls");
-		cout << blue + "    Choose the mode:" << endl;
-		for (int i = 0; i < 4; i++)
+		cout << blue + "    Choose the class with which you want work:" << endl;
+		for (int i = 0; i < 3; i++)
 		{
 			if (i == position)
 				cout << red + "->  " << light_blue + types[i] << endl;
@@ -34,12 +33,12 @@ void menu()
 				{
 					if (position > 0)
 						position--;
-					else position = 3;
+					else position = 2;
 				}
 
 				if ((int)key == 80)
 				{
-					if (position < 3)
+					if (position < 2)
 						position++;
 					else position = 0;
 				}
@@ -51,15 +50,12 @@ void menu()
 			switch (position)
 			{
 			case 0:
-				interactive_mode();
+				//DateAndTime;
 				break;
 			case 1:
-				//demo();
+				//Sortlist();
 				break;
 			case 2:
-				//bench();
-				break;
-			case 3:
 				end = true;
 				break;
 			}
