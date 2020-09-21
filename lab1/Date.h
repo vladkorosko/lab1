@@ -471,6 +471,14 @@ public:
 					stat[CountAllDays(i, j, day) % 7]++;
 					k++;
 				}
+		for (int i = 1; i < month; i++)
+			if (CheckDay(day, i, year))
+			{
+				stat[CountAllDays(year, i, day) % 7]++;
+				k++;
+			}
+		stat[CountAllDays(year, month, day) % 7]++;
+		k++;
 		for (int i = 0; i < stat.size(); i++)
 		{
 			stat[i] /=k;
@@ -491,6 +499,17 @@ public:
 						stat[CountAllDays(i, j, stat_day) % 7]++;
 						k++;
 					}
+			for (int i = 1; i < month; i++)
+				if (CheckDay(stat_day, i, year))
+				{
+					stat[CountAllDays(year, i, stat_day) % 7]++;
+					k++;
+				}
+			if (CheckDay(stat_day, month, year))
+			{
+				stat[CountAllDays(year, month, stat_day) % 7]++;
+				k++;
+			}
 			for (int i = 0; i < stat.size(); i++)
 			{
 				stat[i] /= k;
