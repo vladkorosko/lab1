@@ -17,7 +17,7 @@ ostream& operator<<(ostream& s, Time t)
 
 ostream& operator<<(ostream& s, TimeDifference diff)
 {
-	s << diff.GetDay() << "; " << diff.GetTime();
+	s << "Days: " << diff.GetDay() << "; Time: " << diff.GetTime();
 	return s;
 }
 
@@ -206,4 +206,5 @@ int EnterNumber(const string& number)
 	{
 		throw logic_error("Wrong number format: " + number);
 	}
+	return new_number;
 }
