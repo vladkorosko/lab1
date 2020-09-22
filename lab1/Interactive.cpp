@@ -85,8 +85,10 @@ void DateAndTime()
 				pause();
 				break;
 			case 3:
+				cout << green << "It is " << work_date.NumberOfWeekInMonth() << " in this month." << endl;
 				break;
 			case 4:
+				cout << green << "It is " << work_date.NumberOfWeekInYear() << " in this year." << endl;
 				break;
 			case 5:
 				break;

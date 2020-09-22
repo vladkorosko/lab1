@@ -193,3 +193,17 @@ void pause()
 	cout << light_blue;
 	_getch();
 }
+
+int EnterNumber(const string& number)
+{
+	istringstream date_stream(number);
+	bool ok = true;
+	int new_number;
+	ok = ok && (date_stream >> new_number);
+	ok = ok && date_stream.eof();
+
+	if (!ok)
+	{
+		throw logic_error("Wrong number format: " + number);
+	}
+}

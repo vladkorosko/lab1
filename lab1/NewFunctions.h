@@ -24,3 +24,4 @@ TimeDifference operator-(Date d1, Date d2);
 Date operator+(const Date& d1, const TimeDifference& diff);
 Date operator-(const Date& d1, const TimeDifference& diff);
 void pause();
+int EnterNumber(const string& number);
