@@ -280,6 +280,9 @@ public:
 		day = 1;
 		UTC = 0;
 		mytime = Time();
+		all_days = 0;
+		day_name = "Thursday";
+		month_name = "January";
 	};
 
 	Date(const int& utc, const int& days, const int& new_hour, const int& new_minute, const int& new_second)
