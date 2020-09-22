@@ -474,7 +474,7 @@ public:
 		return result;
 	}
 
-	int NumberOfWeekInYear()
+	int NumberOfWeekInYear()const
 	{
 		int days = CountDaysInYear();
 		Date BeginOfYear(UTC, year, 1, 1, 0, 0, 0);
@@ -484,6 +484,22 @@ public:
 			week++;
 			days -= 7;
 			days += (BeginOfYear.all_days % 7 + 4) % 7;
+		}
+		if (days > 0)
+			return days / 7 + week + 1;
+		else return 1;
+	}
+
+	int NumberOfWeekInMonth()const
+	{
+		int days = day;
+		Date BeginOfMonth(UTC, year, month, 1, 0, 0, 0);
+		int week = 0;
+		if ((BeginOfMonth.all_days % 7 + 4) % 7)
+		{
+			week++;
+			days -= 7;
+			days += (BeginOfMonth.all_days % 7 + 4) % 7;
 		}
 		if (days > 0)
 			return days / 7 + week + 1;
