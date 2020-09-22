@@ -8,5 +8,5 @@ const string green = "\u001B[32m";
 const string yellow = "\u001B[33m";
 const string red = "\u001B[31m";
 
-void interactive_mode();
-void menu();
+void InteractiveMode();
+void Menu();

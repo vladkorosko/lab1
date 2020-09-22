@@ -140,6 +140,20 @@ private:
 		return utc > -13 && utc < 13;
 	}
 
+	int CountDaysInYear()const
+	{
+		int days = 0;
+		for (int i = 0; i < month - 1; i++)
+		{
+			if (i == 1 && LeapYear(year))
+				days++;
+			days += daysInMonth[i];
+		}
+		days += day;
+		days--;
+		return days;
+	}
+
 	int CountAllDays(const int& new_year, const int& new_month, const int& new_day)const
 	{
 		int all_days = 0;
@@ -458,6 +472,22 @@ public:
 		result += "; ";
 		result += mytime.GetTime();
 		return result;
+	}
+
+	int NumberOfWeekInYear()
+	{
+		int days = CountDaysInYear();
+		Date BeginOfYear(UTC, year, 1, 1, 0, 0, 0);
+		int week = 0;
+		if ((BeginOfYear.all_days % 7 + 4) % 7)
+		{
+			week++;
+			days -= 7;
+			days += (BeginOfYear.all_days % 7 + 4) % 7;
+		}
+		if (days > 0)
+			return days / 7 + week + 1;
+		else return 1;
 	}
 
 	vector<double> Stats()

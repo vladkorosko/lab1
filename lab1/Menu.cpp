@@ -1,6 +1,6 @@
 #include "Connection.h"
 
-void menu()
+void Menu()
 {
 	string types[4]
 	{
@@ -51,7 +51,7 @@ void menu()
 			switch (position)
 			{
 			case 0:
-				interactive_mode();
+				InteractiveMode();
 				break;
 			case 1:
 				//demo();

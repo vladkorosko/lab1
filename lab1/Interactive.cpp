@@ -1,6 +1,6 @@
 #include "Connection.h"
 
-void interactive_mode()
+void InteractiveMode()
 {
 	const string types[3]
 	{
@@ -50,7 +50,7 @@ void interactive_mode()
 			switch (position)
 			{
 			case 0:
-				//DateAndTime;
+				//DateAndTime();
 				break;
 			case 1:
 				//Sortlist();
