@@ -186,3 +186,10 @@ ostream& operator<<(ostream& s, vector<Date> l)
 		s << l[i].GetDate() << endl;
 	return s;
 }
+
+void pause()
+{
+	cout << yellow << "Press any key to continue." << endl;
+	cout << light_blue;
+	_getch();
+}
