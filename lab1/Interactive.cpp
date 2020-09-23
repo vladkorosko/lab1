@@ -29,7 +29,7 @@ void DateAndTime()
 		for (int i = 0; i < 13; i++)
 		{
 			if (i == position)
-				cout << red + "->  " << light_blue + types[i] << endl;
+				cout << red + "->  " << yellow + types[i] << endl;
 			else cout << "    " << light_blue + types[i] << endl;
 		}
 
@@ -237,6 +237,86 @@ void DateAndTime()
 	}
 }
 
+void Sortlist()
+{
+	const string types[7]
+	{
+		"Integer;",
+		"Double;",
+		"Char;",
+		"String;",
+		"Vector<int>;",
+		"Date and Time;",
+		"Back."
+	};
+	int position = 0;
+	bool end = false;
+
+	while (!end)
+	{
+		system("cls");
+		cout << blue + "    Choose the class with which you want work:" << endl;
+		for (int i = 0; i < 7; i++)
+		{
+			if (i == position)
+				cout << red + "->  " << yellow + types[i] << endl;
+			else cout << "    " << light_blue + types[i] << endl;
+		}
+
+		char key;
+		key = _getch();
+		if ((int)key != 13)
+		{
+			if ((int)key == -32)
+			{
+				key = _getch();
+				if ((int)key == 72)
+				{
+					if (position > 0)
+						position--;
+					else position = 6;
+				}
+
+				if ((int)key == 80)
+				{
+					if (position < 6)
+						position++;
+					else position = 0;
+				}
+			}
+		}
+		else
+		{
+			system("cls");
+			switch (position)
+			{
+			case 0:
+				//SortListInt();
+				break;
+			case 1:
+				//SortListDouble();
+				break;
+			case 2:
+				//SortListChar();
+				break;
+			case 3:
+				//SortListString();
+				break;
+			case 4:
+				//SortListVectorInt();
+				break;
+			case 5:
+				//SortListDateAndTime();
+				break;
+			case 6:
+				end = true;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
 
 void InteractiveMode()
 {
@@ -256,7 +336,7 @@ void InteractiveMode()
 		for (int i = 0; i < 3; i++)
 		{
 			if (i == position)
-				cout << red + "->  " << light_blue + types[i] << endl;
+				cout << red + "->  " << yellow + types[i] << endl;
 			else cout << "    " << light_blue + types[i] << endl;
 		}
 
@@ -291,7 +371,7 @@ void InteractiveMode()
 				DateAndTime();
 				break;
 			case 1:
-				//Sortlist();
+				Sortlist();
 				break;
 			case 2:
 				end = true;

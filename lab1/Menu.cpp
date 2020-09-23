@@ -19,7 +19,7 @@ void Menu()
 		for (int i = 0; i < 4; i++)
 		{
 			if (i == position)
-				cout << red + "->  " << light_blue + types[i] << endl;
+				cout << red + "->  " << yellow + types[i] << endl;
 			else cout << "    " << light_blue + types[i] << endl;
 		}
 
