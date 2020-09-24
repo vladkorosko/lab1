@@ -11,6 +11,10 @@
 
 using namespace std;
 
+bool operator==(const vector<int>& v1, const vector<int>& v2);
+bool operator>(vector<int> v1, vector<int> v2);
+bool operator<(vector<int> v1, vector<int> v2);
+
 template<typename T>
 class SortList
 {
@@ -92,9 +96,9 @@ private:
 		if (start < finish)
 		{
 			int m = start + (finish - start) / 2;
-			merge_sort(list, start, m);
-			merge_sort(list, m + 1, finish);
-			merge(list, start, m, finish);
+			merge_sort(start, m);
+			merge_sort(m + 1, finish);
+			merge(start, m, finish);
 		}
 	}
 public:
@@ -113,17 +117,9 @@ public:
 
 	void Del(int index)
 	{
-		list.erase(list.begin() + index);
-	}
-
-	T GetValueByIndex(int index) const
-	{
-		return list[index];
-	}
-
-	T SetValueByIndex(int index, T val)
-	{
-		list[index] = val;
+		if (index < list.size() && index >= 0)
+			list.erase(list.begin() + index);
+		else throw logic_error("List index out of range: " + to_string(index) + '.');
 	}
 
 	SortList(vector<T> new_list)

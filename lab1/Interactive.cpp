@@ -291,22 +291,22 @@ void Sortlist()
 			switch (position)
 			{
 			case 0:
-				//SortListInt();
+				SortListInt();
 				break;
 			case 1:
-				//SortListDouble();
+				SortListDouble();
 				break;
 			case 2:
-				//SortListChar();
+				SortListChar();
 				break;
 			case 3:
-				//SortListString();
+				SortListString();
 				break;
 			case 4:
-				//SortListVectorInt();
+				SortListVectorInt();
 				break;
 			case 5:
-				//SortListDateAndTime();
+				SortListDate();
 				break;
 			case 6:
 				end = true;

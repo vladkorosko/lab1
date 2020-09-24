@@ -27,6 +27,9 @@
     <ClCompile Include="Interactive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SortList Menus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SortList.h">

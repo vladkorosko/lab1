@@ -151,6 +151,7 @@
     <ClCompile Include="lab1.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OverloadedOperators.cpp" />
+    <ClCompile Include="SortList Menus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Connection.h" />
