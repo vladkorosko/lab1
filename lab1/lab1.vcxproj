@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Benchmark.cpp" />
+    <ClCompile Include="Demo.cpp" />
     <ClCompile Include="Interactive.cpp" />
     <ClCompile Include="lab1.cpp" />
     <ClCompile Include="Menu.cpp" />

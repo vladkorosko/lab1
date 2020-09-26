@@ -27,9 +27,9 @@ ostream& operator<<(ostream& s, const vector<vector<int>>& v);
 bool operator>(const Time& t1, const Time& t2);
 bool operator==(const Time& t1, const Time& t2);
 bool operator<(const Time& t1, const Time& t2);
-bool operator>(Date d1, Date d2);
-bool operator==(Date d1, Date d2);
-bool operator<(Date d1, Date d2);
+bool operator>(const Date& d1, const Date& d2);
+bool operator==(const Date& d1, const Date& d2);
+bool operator<(const Date& d1, const Date& d2);
 
 TimeDifference operator-(Date d1, Date d2);
 Date operator+(const Date& d1, const TimeDifference& diff);

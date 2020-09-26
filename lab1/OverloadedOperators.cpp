@@ -65,46 +65,61 @@ bool operator<(const Time& t1, const Time& t2)
 	return false;
 }
 
-bool operator>(Date d1, Date d2)
+bool operator>(const Date& d1, const Date& d2)
 {
-	if (d1.GetUTC() > d2.GetUTC())
-		d2.ChangeUTC(d1.GetUTC());
-	else d1.ChangeUTC(d2.GetUTC());
-	if (d1.GetYear() > d2.GetYear())
+	int all_days = d1.GetDateInDays();
+	int hour = d1.GetTime().GetHour() + d2.GetUTC() - d1.GetUTC();
+	if (hour > 23)
+	{
+		hour -= 24;
+		all_days++;
+	}
+	if (hour < 0)
+	{
+		hour += 24;
+		all_days--;
+	}
+	Time t(hour, d1.GetTime().GetMinute(), d1.GetTime().GetSecond());
+
+	if (all_days > d2.GetDateInDays())
 		return true;
-	else if (d1.GetYear() == d2.GetYear() && d1.GetMonth() > d2.GetMonth())
-		return true;
-	else if (d1.GetYear() == d2.GetYear() && d1.GetMonth() == d2.GetMonth() && d1.GetDay() > d2.GetDay())
-		return true;
-	else if (d1.GetYear() == d2.GetYear() && d1.GetMonth() == d2.GetMonth() && d1.GetDay() == d2.GetDay() && d1.GetTime() > d2.GetTime())
+	else if (all_days == d2.GetDateInDays() && t > d2.GetTime())
 		return true;
 	return false;
 }
 
-bool operator==(Date d1, Date d2)
+bool operator==(const Date& d1, const Date& d2)
 {
-	if (d1.GetUTC() > d2.GetUTC())
-		d2.ChangeUTC(d1.GetUTC());
-	else d1.ChangeUTC(d2.GetUTC());
-	return d1.GetDate() == d2.GetDate();
+	return d1.GetDateInDays() == d2.GetDateInDays()
+		&& ((d1.GetTime().GetHour() + 12 - d1.GetUTC() == d2.GetTime().GetHour())
+			|| (d1.GetTime().GetHour() + 12 - d1.GetUTC() - 24 == d2.GetTime().GetHour())
+			|| (d1.GetTime().GetHour() + 12 - d1.GetUTC() + 24 == d2.GetTime().GetHour()))
+		&& (d1.GetTime().GetMinute() == d2.GetTime().GetMinute())
+		&& (d1.GetTime().GetSecond() == d2.GetTime().GetSecond());
 }
 
-bool operator<(Date d1, Date d2)
+bool operator<(const Date& d1, const Date& d2)
 {
-	if (d1.GetUTC() > d2.GetUTC())
-		d2.ChangeUTC(d1.GetUTC());
-	else d1.ChangeUTC(d2.GetUTC());
-	if (d1.GetYear() < d2.GetYear())
+	int all_days = d1.GetDateInDays();
+	int hour = d1.GetTime().GetHour() + d2.GetUTC() - d1.GetUTC();
+	if (hour > 23)
+	{
+		hour -= 24;
+		all_days++;
+	}
+	if (hour < 0)
+	{
+		hour += 24;
+		all_days--;
+	}
+	Time t(hour, d1.GetTime().GetMinute(), d1.GetTime().GetSecond());
+
+	if (all_days < d2.GetDateInDays())
 		return true;
-	else if (d1.GetYear() == d2.GetYear() && d1.GetMonth() < d2.GetMonth())
-		return true;
-	else if (d1.GetYear() == d2.GetYear() && d1.GetMonth() == d2.GetMonth() && d1.GetDay() < d2.GetDay())
-		return true;
-	else if (d1.GetYear() == d2.GetYear() && d1.GetMonth() == d2.GetMonth() && d1.GetDay() == d2.GetDay() && d1.GetTime() < d2.GetTime())
+	else if (all_days == d2.GetDateInDays() && t < d2.GetTime())
 		return true;
 	return false;
 }
-
 
 bool operator==(const vector<int>& v1, const vector<int>& v2)
 {

@@ -351,7 +351,14 @@ public:
 	
 	void operator=(const Date& d)
 	{
-		Set(d.GetUTC(), d.GetYear(), d.GetMonth(), d.GetDay(), d.GetTime().GetHour(), d.GetTime().GetMinute(), d.GetTime().GetSecond());
+		UTC = d.UTC;
+		year = d.year;
+		month = d.month;
+		day = d.day;
+		mytime = d.mytime;
+		all_days = d.all_days;
+		day_name = d.day_name;
+		month_name = d.month_name;
 	}
 
 	void AutoGenerate()
