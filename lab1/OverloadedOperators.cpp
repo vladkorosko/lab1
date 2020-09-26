@@ -208,16 +208,16 @@ Date operator+(const Date& d1, const TimeDifference& diff)
 	{
 		second -= 60;
 		minute++;
-		if (minute > 59)
-		{
-			minute -= 60;
-			hour++;
-			if (hour > 23)
-			{
-				hour -= 24;
-				days++;
-			}
-		}
+	}
+	if (minute > 59)
+	{
+		minute -= 60;
+		hour++;
+	}
+	if (hour > 23)
+	{
+		hour -= 24;
+		days++;
 	}
 	return Date(d1.GetUTC(), days, hour, minute, second);
 }
@@ -234,16 +234,16 @@ Date operator-(const Date& d1, const TimeDifference& diff)
 		{
 			second += 60;
 			minute--;
-			if (minute < 0)
-			{
-				minute += 60;
-				hour--;
-				if (hour < 0)
-				{
-					hour += 24;
-					days--;
-				}
-			}
+		}
+		if (minute < 0)
+		{
+			minute += 60;
+			hour--;
+		}
+		if (hour < 0)
+		{
+			hour += 24;
+			days--;
 		}
 		return Date(d1.GetUTC(), days, hour, minute, second);
 	}

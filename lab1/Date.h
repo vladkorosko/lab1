@@ -496,7 +496,7 @@ public:
 			days += (BeginOfYear.all_days % 7 + 4) % 7;
 		}
 		if (days > 0)
-			return days / 7 + week + 1;
+			return days / 7 + week;
 		else return 1;
 	}
 
@@ -512,7 +512,7 @@ public:
 			days += (BeginOfMonth.all_days % 7 + 4) % 7;
 		}
 		if (days > 0)
-			return days / 7 + week + 1;
+			return days / 7 + week;
 		else return 1;
 	}
 
