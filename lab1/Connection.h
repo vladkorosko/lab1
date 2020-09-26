@@ -9,4 +9,5 @@ void SortListVectorInt();
 void SortListDate();
 
 void InteractiveMode();
+void bench();
 void Menu();

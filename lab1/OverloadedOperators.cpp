@@ -116,7 +116,7 @@ bool operator==(const vector<int>& v1, const vector<int>& v2)
 	return result;
 }
 
-bool operator>(vector<int> v1, vector<int> v2)
+bool operator>(vector<int>& v1, vector<int>& v2)
 {
 	sort(v1.begin(), v1.end());
 	sort(v2.begin(), v2.end());
@@ -124,14 +124,17 @@ bool operator>(vector<int> v1, vector<int> v2)
 		return true;
 	if (v1.size() < v2.size())
 		return false;
-	bool result1 = true;
-	if (v1.size() == v2.size())
-		for (int i = 0; i < v1.size(); i++)
-			result1 = result1 && v1[i] > v2[i];
-	return result1;
+	for (int i = 0; i < v1.size(); i++)
+	{
+		if (v1[i] > v2[i])
+			return true;
+		if (v1[i] < v2[i])
+			return false;
+	}
+	return false;
 }
 
-bool operator<(vector<int> v1, vector<int> v2)
+bool operator<(vector<int>& v1, vector<int>& v2)
 {
 	sort(v1.begin(), v1.end());
 	sort(v2.begin(), v2.end());
@@ -139,11 +142,14 @@ bool operator<(vector<int> v1, vector<int> v2)
 		return true;
 	if (v1.size() > v2.size())
 		return false;
-	bool result1 = true;
-	if (v1.size() == v2.size())
-		for (int i = 0; i < v1.size(); i++)
-			result1 = result1 && v1[i] < v2[i];
-	return result1;
+	for (int i = 0; i < v1.size(); i++)
+	{
+		if (v1[i] < v2[i])
+			return true;
+		if (v1[i] > v2[i])
+			return false;
+	}
+	return false;
 }
 
 TimeDifference operator-(Date d1, Date d2)
@@ -313,7 +319,7 @@ vector<vector<int>> AutoGenerateVectorInt(int n)
 	for (int i = 0; i < n; i++)
 	{
 		vector<int> list;
-		int sz = rand() % 10 + 1;
+		int sz = rand() % 5 + 1;
 		for (int i = 0; i < sz; i++)
 			list.push_back(rand());
 		result.push_back(list);

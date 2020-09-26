@@ -12,8 +12,8 @@
 using namespace std;
 
 bool operator==(const vector<int>& v1, const vector<int>& v2);
-bool operator>(vector<int> v1, vector<int> v2);
-bool operator<(vector<int> v1, vector<int> v2);
+bool operator>(vector<int>& v1, vector<int>& v2);
+bool operator<(vector<int>& v1, vector<int>& v2);
 
 template<typename T>
 class SortList
@@ -51,7 +51,8 @@ private:
 		int n1 = index_of_last_element_of_first_part - index_of_first_element_of_first_part + 1;
 		int n2 = index_of_last_element_second_part - index_of_last_element_of_first_part;
 
-		vector<T> First_array(n1, ""), Second_array(n2, "");
+		vector<T> First_array(n1);
+		vector<T> Second_array(n2);
 
 		for (i = 0; i < n1; i++)
 			First_array[i] = list[index_of_first_element_of_first_part + i];
@@ -63,7 +64,7 @@ private:
 		k = index_of_first_element_of_first_part;
 		while (i < n1 && j < n2)
 		{
-			if (First_array[i] <= Second_array[j])
+			if (First_array[i] < Second_array[j])
 			{
 				list[k] = First_array[i];
 				i++;
@@ -126,6 +127,11 @@ public:
 	{
 		for (auto i : new_list)
 			Add(i);
+	}
+
+	void operator=(SortList b)
+	{
+		list = b.list;
 	}
 
 	vector<T> GetList() const

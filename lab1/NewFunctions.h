@@ -2,7 +2,9 @@
 #include"Date.h"
 #include<conio.h>
 
+const string colour = "\u001B[37m";
 const string light_blue = "\u001B[36m";
+const string violet = "\u001B[35m";
 const string blue = "\u001B[34m";
 const string green = "\u001B[32m";
 const string yellow = "\u001B[33m";

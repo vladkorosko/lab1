@@ -57,7 +57,7 @@ void Menu()
 				//demo();
 				break;
 			case 2:
-				//bench();
+				bench();
 				break;
 			case 3:
 				end = true;
