@@ -54,7 +54,7 @@ void Menu()
 				InteractiveMode();
 				break;
 			case 1:
-				//demo();
+				demo();
 				break;
 			case 2:
 				bench();

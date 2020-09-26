@@ -65,46 +65,43 @@ void DateAndTime()
 			int minute = 0;
 			int second = 0;
 			string line = "";
+			int utc = 0;
+			vector<double> stats;
 			system("cls");
-			switch (position)
+			try
 			{
-			case 0:
-				try 
+				switch (position)
 				{
+				case 0:
+
 					cout << blue + "Enter date(Format: 'utc: yyyy.mm.dd; hh:mm:ss' (utc between [-12,+12]))" << endl << light_blue;
 					getline(cin, line);
 					work_date = Date(line);
-				}
-				catch (logic_error& e)
-				{
-					cout << red << e.what() << endl;
-				}
-				pause();
-				break;
-			case 1:
-				work_date.AutoGenerate();
-				pause();
-				break;
-			case 2:
-				cout << green << work_date.GetDate()<< endl;
-				pause();
-				break;
-			case 3:
-				cout << green << work_date << endl;
-				pause();
-				break;
-			case 4:
-				cout << green << "It is " << work_date.NumberOfWeekInMonth() << " in this month." << endl;
-				pause();
-				break;
-			case 5:
-				cout << green << "It is " << work_date.NumberOfWeekInYear() << " in this year." << endl;
-				pause();
-				break;
-			case 6:
-				try
-				{
-					vector<double> stats = work_date.Stats();
+
+					pause();
+					break;
+				case 1:
+					work_date.AutoGenerate();
+					pause();
+					break;
+				case 2:
+					cout << green << work_date.GetDate() << endl;
+					pause();
+					break;
+				case 3:
+					cout << green << work_date << endl;
+					pause();
+					break;
+				case 4:
+					cout << green << "It is " << work_date.NumberOfWeekInMonth() << " in this month." << endl;
+					pause();
+					break;
+				case 5:
+					cout << green << "It is " << work_date.NumberOfWeekInYear() << " in this year." << endl;
+					pause();
+					break;
+				case 6:
+					stats = work_date.Stats();
 					cout << green << setw(12) << "Monday: " << setw(5) << setprecision(5) << stats[4] * 100 << '%' << endl;
 					cout << green << setw(12) << "Tuesday: " << setw(5) << setprecision(5) << stats[5] * 100 << '%' << endl;
 					cout << green << setw(12) << "Wednesday: " << setw(5) << setprecision(5) << stats[6] * 100 << '%' << endl;
@@ -112,53 +109,32 @@ void DateAndTime()
 					cout << green << setw(12) << "Friday: " << setw(5) << setprecision(5) << stats[1] * 100 << '%' << endl;
 					cout << green << setw(12) << "Saturday: " << setw(5) << setprecision(5) << stats[2] * 100 << '%' << endl;
 					cout << green << setw(12) << "Sunday: " << setw(5) << setprecision(5) << stats[3] * 100 << '%' << endl;
-				}
-				catch (logic_error& e)
-				{
-					cout << red << e.what() << endl;
-				}
-				pause();
-				break;
-			case 7:
-				try
-				{
+					pause();
+					break;
+				case 7:
 					cout << blue + "Enter day." << endl;
 					cout << light_blue;
 					getline(cin, line);
 					day = EnterNumber(line);
-					vector<double> stats = work_date.Stats(day);
+					stats = work_date.Stats(day);
 					cout << green << setw(12) << "Monday: " << setw(5) << setprecision(5) << stats[4] * 100 << '%' << endl;
-					cout << green << setw(12) << "Tuesday: " << setw(5) << setprecision(5) << stats[5]*100 << '%' << endl;
-					cout << green << setw(12) << "Wednesday: " << setw(5) << setprecision(5) << stats[6]*100 << '%' << endl;
-					cout << green << setw(12) << "Thirsday: " << setw(5) << setprecision(5) << stats[0]*100 << '%' << endl;
-					cout << green << setw(12) << "Friday: " << setw(5) << setprecision(5) << stats[1]*100 << '%' << endl;
-					cout << green << setw(12) << "Saturday: " << setw(5) << setprecision(5) << stats[2]*100 << '%' << endl;
-					cout << green << setw(12) << "Sunday: " << setw(5) << setprecision(5) << stats[3]*100 << '%' << endl;
-				}
-				catch (logic_error& e)
-				{
-					cout << red << e.what()<< endl;
-				}
-				pause();
-				break;
-			case 8:
-				try
-				{
+					cout << green << setw(12) << "Tuesday: " << setw(5) << setprecision(5) << stats[5] * 100 << '%' << endl;
+					cout << green << setw(12) << "Wednesday: " << setw(5) << setprecision(5) << stats[6] * 100 << '%' << endl;
+					cout << green << setw(12) << "Thirsday: " << setw(5) << setprecision(5) << stats[0] * 100 << '%' << endl;
+					cout << green << setw(12) << "Friday: " << setw(5) << setprecision(5) << stats[1] * 100 << '%' << endl;
+					cout << green << setw(12) << "Saturday: " << setw(5) << setprecision(5) << stats[2] * 100 << '%' << endl;
+					cout << green << setw(12) << "Sunday: " << setw(5) << setprecision(5) << stats[3] * 100 << '%' << endl;
+					pause();
+					break;
+				case 8:
 					cout << blue + "Enter new time zone(UTC)." << endl;
 					cout << light_blue;
 					getline(cin, line);
-					int utc = EnterNumber(line);
+					utc = EnterNumber(line);
 					work_date.ChangeUTC(utc);
-				}
-				catch (logic_error& e)
-				{
-					cout << red << e.what() << endl;
-				}
-				pause();
-				break;
-			case 9:
-				try
-				{
+					pause();
+					break;
+				case 9:
 					cout << blue + "Enter first date(Format: 'utc: yyyy.mm.dd; hh:mm:ss' (utc between [-12,+12]))" << endl << light_blue;
 					getline(cin, line);
 					first_date = Date(line);
@@ -166,16 +142,9 @@ void DateAndTime()
 					getline(cin, line);
 					second_date = Date(line);
 					cout << green << first_date - second_date << endl;
-				}
-				catch (logic_error& e)
-				{
-					cout << red << e.what() << endl;
-				}
-				pause();
-				break;
-			case 10:
-				try
-				{
+					pause();
+					break;
+				case 10:
 					cout << blue + "Enter first date(Format: 'utc: yyyy.mm.dd; hh:mm:ss' (utc between [-12,+12]))" << endl << light_blue;
 					getline(cin, line);
 					first_date = Date(line);
@@ -193,16 +162,9 @@ void DateAndTime()
 					second = EnterNumber(line);
 					diff = TimeDifference(day, hour, minute, second);
 					cout << green << first_date + diff << endl;
-				}
-				catch (logic_error& e)
-				{
-					cout << red << e.what() << endl;
-				}
-				pause();
-				break;
-			case 11:
-				try
-				{
+					pause();
+					break;
+				case 11:
 					cout << blue + "Enter first date(Format: 'utc: yyyy.mm.dd; hh:mm:ss' (utc between [-12,+12]))" << endl << light_blue;
 					getline(cin, line);
 					first_date = Date(line);
@@ -220,18 +182,18 @@ void DateAndTime()
 					second = EnterNumber(line);
 					diff = TimeDifference(day, hour, minute, second);
 					cout << green << first_date - diff << endl;
+					pause();
+					break;
+				case 12:
+					end = true;
+					break;
+				default:
+					break;
 				}
-				catch (logic_error& e)
-				{
-					cout << red << e.what() << endl;
-				}
-				pause();
-				break;
-			case 12:
-				end = true;
-				break;
-			default:
-				break;
+			}
+			catch (logic_error& e)
+			{
+				cout << red << e.what() << endl;
 			}
 		}
 	}
