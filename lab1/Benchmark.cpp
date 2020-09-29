@@ -173,7 +173,7 @@ void bench()
 
 	cout << blue << "In the next tables shown time of work different functions for different types." << endl;
 	cout << blue << "Integer:" << endl;
-	cout << colour << setw(18) << types[0] << violet << setw(16) << types[1] << blue << setw(14) << types[2] << yellow << setw(16) << types[3]
+	cout << colour << setw(18) << setfill(' ')<< types[0] << violet << setw(16) << types[1] << blue << setw(14) << types[2] << yellow << setw(16) << types[3]
 		<< green << setw(16) << types[4] << light_blue << setw(14) << types[5] << red << setw(14) << types[6] << endl;
 	for (int i = 0; i < 5; i++)
 	{
